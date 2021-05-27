@@ -3,16 +3,16 @@ import { Request, Response } from "express"
 import { Todo, validate } from "../models/todo.model"
 
 class TodosController {
-    async get_all(req: Request, res: Response) {
+    async get_all (req: Request, res: Response) {
         try {
             const todos = await Todo.find();
             return res.send(todos);
-        } catch (e) {
+        } catch ( e ) {
             return res.status(500).send(e);
         }
     }
 
-    async create(req: Request, res: Response) {
+    async create (req: Request, res: Response) {
         try {
             const valid = validate(req.body);
 
@@ -27,7 +27,7 @@ class TodosController {
             return res
                 .status(400)
                 .send({ message: "Failed to create a new todo" });
-        } catch (e) {
+        } catch ( e ) {
             return res.status(500).send(e);
         }
     }
