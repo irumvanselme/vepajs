@@ -1,21 +1,17 @@
 import mongoose from "mongoose";
-import Validator from "validatorjs";
 import { Todo } from "../interfaces/Todo";
+import { Model } from "./model"
 
-const todoSchema = new mongoose.Schema({
-    name: { required: true, type: String, minlength: 4 },
-    description: { type: String, minlength: 10 },
-});
+class TodoModel extends Model<Todo> {
+    schema = new mongoose.Schema({
+        name: { required: true, type: String, minlength: 4 },
+        description: { type: String, minlength: 10 },
+    });
 
-const Todo = mongoose.model("Todo", todoSchema);
-
-const validate = (data: any) => {
-    const rules = {
+    validations = {
         name: "string|required|min:4",
         description: "string|required|min:10",
-    };
+    }
+}
 
-    return new Validator(data, rules);
-};
-
-export { Todo, validate };
+export default new TodoModel("Todo")
