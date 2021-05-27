@@ -1,17 +1,12 @@
-import mongoose from "mongoose";
 import { Todo } from "../interfaces/Todo";
 import { Model } from "./model"
+import { TodoSchema } from "../database/todo.schema";
+
 
 class TodoModel extends Model<Todo> {
-    schema = new mongoose.Schema({
-        name: { required: true, type: String, minlength: 4 },
-        description: { type: String, minlength: 10 },
-    });
-
-    validations = {
-        name: "string|required|min:4",
-        description: "string|required|min:10",
+    constructor () {
+        super("Todo", TodoSchema);
     }
 }
 
-export default new TodoModel("Todo")
+export default new TodoModel()

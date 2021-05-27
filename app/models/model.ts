@@ -1,26 +1,15 @@
 import mongoose from "mongoose";
-import Validator from "validatorjs";
-
 
 export class Model<Type> {
-    protected schema: mongoose.Schema = new mongoose.Schema();
-    protected validations: any
-
     private readonly _model: mongoose.Model<any>;
 
-    private valid: Validator.Validator<any>;
 
     get query (): mongoose.Model<any> {
         return this._model;
     }
 
-    constructor (name: string) {
-        this._model = mongoose.model(name, this.schema)
-        this.valid = new Validator({}, this.validations)
-    }
-
-    public validate (data: Type): Validator.Validator<any> {
-        return new Validator(data, this.validations);
+    constructor (name: string, schema: mongoose.Schema) {
+        this._model = mongoose.model(name, schema)
     }
 
     public all () {
@@ -33,8 +22,10 @@ export class Model<Type> {
     }
 
     public async create(data: Type){
+        console.log(data)
         try {
-            return await (new this.query(data)).save()
+            let element = new this._model(data)
+            return await element.save()
         } catch ( e ) {
             console.log(e)
             process.exit(0)
