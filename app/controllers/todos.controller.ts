@@ -1,9 +1,10 @@
 import { Request, Response } from "express"
 
 import Todo from "../models/todo.model"
-import Validator from "validatorjs";
+import { Controller } from "./index";
 
-class TodosController {
+class TodosController extends Controller {
+
     async get_all (req: Request, res: Response) {
         let todos = await Todo.all();
 
@@ -11,14 +12,12 @@ class TodosController {
     }
 
     async create (req: Request, res: Response) {
-        let valid = new Validator(req.body, {
+        let valid = super.validate(req.body, {
             name: "string|required|min:4",
-            description: "string|required|min:10",
-        })
+            description: "string|required|min:10"
+        });
 
-        if(valid.fails()){
-            return res.send(valid.errors.all())
-        }
+        if(valid.fails()) return res.send(valid.errors.all())
 
         let newTodo = await Todo.create(req.body)
 

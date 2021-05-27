@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 export class Model<Type> {
     private readonly _model: mongoose.Model<any>;
 
-
     get query (): mongoose.Model<any> {
         return this._model;
     }
@@ -22,7 +21,6 @@ export class Model<Type> {
     }
 
     public async create(data: Type){
-        console.log(data)
         try {
             let element = new this._model(data)
             return await element.save()
