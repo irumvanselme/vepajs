@@ -1,6 +1,6 @@
 import { Todo } from "../interfaces/Todo";
 import { Model } from "./model"
-import { TodoSchema } from "../database/todo.schema";
+import { TodoSchema } from "../config/database/schemas/todo.schema";
 
 
 class TodoModel extends Model<Todo> {
