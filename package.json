@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev index.ts"
+    "dev": "ts-node-dev index.ts --quiet"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/irumvanselme/vepajs#readme",
   "dependencies": {
     "@types/express": "^4.17.12",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ts-node": "^10.0.0",
     "ts-node-dev": "^1.1.6",
